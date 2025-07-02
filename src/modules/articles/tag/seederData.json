@@ -1,0 +1,14 @@
+[
+  {
+    "name": "جمهوری اسلامی ایران",
+    "description": "همه چیز درباره جمهوری اسلامی ایران",
+    "hasFamily": true,
+    "tagFamilyId": 1
+  },
+  {
+    "name": "ایران",
+    "description": "همه چیز درباره ایران",
+    "hasFamily": true,
+    "tagFamilyId": 1
+  }
+] 

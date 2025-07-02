@@ -1,0 +1,71 @@
+[
+  {
+    "name": "خبرگزاری تسنیم",
+    "nameEn": "Tasnim News Agency",
+    "websiteUrl": "https://www.tasnimnews.com",
+    "description": "خبرگزاری تسنیم",
+    "logo": "https://www.tasnimnews.com/Static/img/tasnim-main-logo.png"
+  },
+  {
+    "name": "خبرگزاری خبرآنلاین",
+    "nameEn": "Khabar Online News Agency",
+    "websiteUrl": "https://www.khabaronline.ir",
+    "description": "خبرگزاری خبرآنلاین",
+    "logo": "https://www.khabaronline.ir/themes/custom/khabaronline_theme/logo.svg",
+    "baseUrl": "https://www.khabaronline.ir"
+  },
+  {
+    "name": "اطلاعات آنلاین",
+    "nameEn": "Ettelaat News Agency",
+    "websiteUrl": "https://www.ettelaat.com/",
+    "description": "خبرگزاری اطلاعات",
+    "logo": null
+  },
+  {
+    "name": "افکار نیوز",
+    "nameEn": "Afkar News Agency",
+    "websiteUrl": "https://www.afkarnews.com/",
+    "description": "پایگاه خبری تحلیلی افکار نیوز",
+    "logo": null
+  },
+  {
+    "name": "پارس نیوز",
+    "nameEn": "Pars News Agency",
+    "websiteUrl": "https://www.parsnews.com/",
+    "description": "پایگاه خبری تحلیلی پارس نیوز",
+    "logo": null
+  },
+  {
+    "name": "فرارو",
+    "nameEn": "Fararu News Agency",
+    "websiteUrl": "https://fararu.com/",
+    "description": "پایگاه خبری تحلیلی فرارو",
+    "logo": null
+  },
+  {
+    "name": "همشهری آنلاین",
+    "nameEn": "Hamshahri Online",
+    "websiteUrl": "https://www.hamshahrionline.ir/",
+    "description": "The online version of the Iranian daily Hamshahri",
+    "logo": "https://www.hamshahrionline.ir/assets/images/logo-footer.png"
+  },
+  {
+    "name": "نامه نیوز",
+    "nameEn": "Nameh News",
+    "websiteUrl": "https://www.namehnews.com/",
+    "description": "پایگاه خبری تحلیلی نامه نیوز",
+    "logo": null
+  },
+  {
+    "name": "مشرق نیوز",
+    "nameEn": "Mashregh News",
+    "websiteUrl": "https://www.mashreghnews.ir/",
+    "logo": null
+  },
+  {
+    "name": "مثلث آنلاین",
+    "nameEn": "Mosalas Online",
+    "websiteUrl": "https://www.mosalasonline.com",
+    "logo": null
+  }
+] 
