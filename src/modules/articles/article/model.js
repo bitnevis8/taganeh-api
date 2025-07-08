@@ -39,7 +39,7 @@ Article.init(
       type: DataTypes.INTEGER, 
       allowNull: false,
       references: {
-        model: 'news_agencies',
+        model: 'agencies',
         key: 'id'
       }
     },
@@ -56,7 +56,7 @@ Article.init(
   {
     sequelize,
     modelName: "Article",
-    tableName: "news_articles",
+    tableName: "articles",
     timestamps: true,
     underscored: true
   }

@@ -46,7 +46,7 @@ Agency.init(
   {
     sequelize,
     modelName: "Agency",
-    tableName: "news_agencies",
+    tableName: "agencies",
     timestamps: true,
     underscored: true
   }

@@ -18,14 +18,10 @@ const SERVER_CONFIG = {
 // تنظیمات محیط‌های مختلف
 const ALLOWED_ORIGINS = {
   production: [
-    "https://parandx.com",
-    "https://www.parandx.com",
-    "https://aryafoulad.parandx.com",
-    "https://www.v2.parandx.com",
-    "https://pourdian.com",
-    "https://www.pourdian.com",
-    "https://aryafoulad.pourdian.com",
-    "https://aryafoulad-api.pourdian.com"
+    "https://api.taganeh.ir",
+    "https://api.taganeh.com",
+    "https://taganeh.ir",
+    "https://taganeh.com"
   ],
   development: [
     "http://localhost:3003",

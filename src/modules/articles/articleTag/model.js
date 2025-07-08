@@ -14,7 +14,7 @@ ArticleTag.init(
       type: DataTypes.INTEGER, 
       allowNull: false,
       references: {
-        model: 'news_articles',
+        model: 'articles',
         key: 'id'
       }
     },
@@ -22,7 +22,7 @@ ArticleTag.init(
       type: DataTypes.INTEGER, 
       allowNull: false,
       references: {
-        model: 'news_tags',
+        model: 'tags',
         key: 'id'
       }
     }
@@ -30,7 +30,7 @@ ArticleTag.init(
   {
     sequelize,
     modelName: "ArticleTag",
-    tableName: "news_article_tags",
+    tableName: "article_tags",
     timestamps: true,
     underscored: true
   }

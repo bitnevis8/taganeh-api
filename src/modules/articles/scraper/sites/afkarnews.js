@@ -15,6 +15,43 @@ async function getCategoryBySlug(slug) {
   return category;
 }
 
+// تابع کمکی برای استخراج تگ‌ها از افکار نیوز
+function extractTagsFromAfkarNews($) {
+  let tags = [];
+  
+  // روش اول: از بخش کلمات کلیدی
+  $('#keyword .float.w80 a').each((i, el) => {
+    const tag = $(el).text().trim();
+    if (tag && tag.length > 0) {
+      tags.push(tag);
+    }
+  });
+  
+  // روش دوم: از تمام لینک‌های کلمات کلیدی
+  if (tags.length === 0) {
+    $('#keyword a').each((i, el) => {
+      const tag = $(el).text().trim();
+      if (tag && tag.length > 0) {
+        tags.push(tag);
+      }
+    });
+  }
+  
+  // روش سوم: از meta keywords
+  if (tags.length === 0) {
+    const metaKeywords = $('meta[name="keywords"]').attr('content');
+    if (metaKeywords) {
+      tags = metaKeywords.split(',').map(t => t.trim()).filter(Boolean);
+    }
+  }
+  
+  // حذف تگ‌های تکراری
+  tags = [...new Set(tags)];
+  
+  console.log('AfkarNews: تگ‌های استخراج شده:', tags);
+  return tags;
+}
+
 class AfkarNewsScraper {
   static async scrapePolitics() {
     const url = `${BASE_URL}/بخش-سیاسی-3`;
@@ -38,16 +75,9 @@ class AfkarNewsScraper {
       try {
         const { data: articleHtml } = await axios.get(article.link);
         const $$ = cheerio.load(articleHtml);
-        // تگ‌ها
-        let tags = [];
-        $$('#keyword a').each((i, el) => {
-          const tag = $$(el).text().trim();
-          if (tag) tags.push(tag);
-        });
-        if (tags.length === 0) {
-          const metaKeywords = $$('meta[name="keywords"]').attr('content');
-          if (metaKeywords) tags = metaKeywords.split(',').map(t => t.trim()).filter(Boolean);
-        }
+        // تگ‌ها - استفاده از تابع کمکی
+        const tags = extractTagsFromAfkarNews($$);
+        article.tags = tags;
         // تصویر اصلی
         let mainImage = $$('.newsimg-contain img').attr('src');
         if (mainImage && !mainImage.startsWith('http')) mainImage = CDN_URL + mainImage;
@@ -126,15 +156,9 @@ class AfkarNewsScraper {
       try {
         const { data: articleHtml } = await axios.get(article.link);
         const $$ = cheerio.load(articleHtml);
-        let tags = [];
-        $$('#keyword a').each((i, el) => {
-          const tag = $$(el).text().trim();
-          if (tag) tags.push(tag);
-        });
-        if (tags.length === 0) {
-          const metaKeywords = $$('meta[name="keywords"]').attr('content');
-          if (metaKeywords) tags = metaKeywords.split(',').map(t => t.trim()).filter(Boolean);
-        }
+        // تگ‌ها - استفاده از تابع کمکی
+        const tags = extractTagsFromAfkarNews($$);
+        article.tags = tags;
         let mainImage = $$('.newsimg-contain img').attr('src');
         if (mainImage && !mainImage.startsWith('http')) mainImage = CDN_URL + mainImage;
         const lead = $$('.lead').text().trim();

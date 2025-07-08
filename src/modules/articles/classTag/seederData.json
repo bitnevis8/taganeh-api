@@ -1,0 +1,82 @@
+[
+  {
+    "tagName": "محمد رضا گلزار",
+    "classSlugs": ["person", "artist"]
+  },
+  {
+    "tagName": "علی دایی",
+    "classSlugs": ["person", "athlete"]
+  },
+  {
+    "tagName": "حسن روحانی",
+    "classSlugs": ["person", "political-person"]
+  },
+  {
+    "tagName": "تهران",
+    "classSlugs": ["place", "city"]
+  },
+  {
+    "tagName": "پرسپولیس",
+    "classSlugs": ["organization", "sports-club"]
+  },
+  {
+    "tagName": "جام جهانی",
+    "classSlugs": ["event", "sports-event"]
+  },
+  {
+    "tagName": "هوش مصنوعی",
+    "classSlugs": ["topic", "technology"]
+  },
+  {
+    "tagName": "اپل",
+    "classSlugs": ["organization", "company-brand"]
+  },
+  {
+    "tagName": "کرونا",
+    "classSlugs": ["topic", "health"]
+  },
+  {
+    "tagName": "انتخابات",
+    "classSlugs": ["event", "political-event"]
+  },
+  {
+    "tagName": "تورم",
+    "classSlugs": ["topic", "economy"]
+  },
+  {
+    "tagName": "سینمای ایران",
+    "classSlugs": ["topic", "culture-art"]
+  },
+  {
+    "tagName": "جنگل آمازون",
+    "classSlugs": ["place", "natural-site"]
+  },
+  {
+    "tagName": "سازمان ملل",
+    "classSlugs": ["organization", "international-organization"]
+  },
+  {
+    "tagName": "یوتیوب",
+    "classSlugs": ["media-source", "website-platform"]
+  },
+  {
+    "tagName": "عید نوروز",
+    "classSlugs": ["time-occasion", "national-occasion"]
+  },
+  {
+    "tagName": "آزادی بیان",
+    "classSlugs": ["concept-sentiment", "political-social-concept"]
+  },
+  {
+    "tagName": "زبان فارسی",
+    "classSlugs": ["language-ethnicity", "language"]
+  },
+  {
+    "tagName": "ایرنا",
+    "classSlugs": ["media-source", "news-agency"]
+  },
+  {
+    "tagName": "کوه دماوند",
+    "classSlugs": ["place", "natural-site"]
+  }
+] 

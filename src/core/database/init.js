@@ -17,7 +17,8 @@ require("../../modules/articles/agency/model");
 require("../../modules/articles/article/model");
 require("../../modules/articles/category/model");
 require("../../modules/articles/tag/model");
-require("../../modules/articles/tagFamily/model");
+require("../../modules/articles/class/model");
+require("../../modules/articles/classTag/model");
 require("../../modules/articles/articleCategory/model");
 require("../../modules/articles/articleTag/model");
 

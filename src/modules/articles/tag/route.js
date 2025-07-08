@@ -1,26 +1,19 @@
 const express = require("express");
-const router = express.Router();
 const tagController = require("./controller");
 
-// دریافت تمام تگ‌ها
-router.get("/", tagController.getAll);
+const router = express.Router();
 
-// جستجو در تگ‌ها
-router.get("/search", tagController.search);
-
-// دریافت تگ‌های یک خانواده
-router.get("/family/:familyId", tagController.getByFamily);
-
-// دریافت یک تگ
-router.get("/:id", tagController.getOne);
-
-// ایجاد تگ جدید
-router.post("/", tagController.create);
-
-// ویرایش تگ
-router.put("/:id", tagController.update);
-
-// حذف تگ
-router.delete("/:id", tagController.delete);
+// روت‌های مربوط به تگ‌ها
+router.get("/getAll", tagController.getAll); // دریافت تمام تگ‌ها
+router.get("/getAllWithArticleCount", tagController.getAllWithArticleCount); // دریافت همه تگ‌ها با شمارش مقالات
+router.get("/getByClasses", tagController.getByClasses); // دریافت تگ‌ها بر اساس کلاس‌ها
+router.get("/testDatabase", tagController.testDatabase); // تست دیتابیس
+router.get("/search", tagController.search); // جستجوی تگ‌ها
+router.get("/getByName/:name", tagController.getByName); // دریافت یک تگ بر اساس نام
+router.get("/getByFamily/:familyId", tagController.getByFamily); // دریافت تگ‌های یک خانواده خاص
+router.get("/getOne/:id", tagController.getOne); // دریافت یک تگ بر اساس ID
+router.post("/create", tagController.create); // ایجاد تگ جدید
+router.put("/update/:id", tagController.update); // ویرایش تگ بر اساس ID
+router.delete("/delete/:id", tagController.delete); // حذف تگ بر اساس ID
 
 module.exports = router; 

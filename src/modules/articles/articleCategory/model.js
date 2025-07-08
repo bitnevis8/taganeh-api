@@ -14,7 +14,7 @@ ArticleCategory.init(
       type: DataTypes.INTEGER, 
       allowNull: false,
       references: {
-        model: 'news_articles',
+        model: 'articles',
         key: 'id'
       }
     },
@@ -22,7 +22,7 @@ ArticleCategory.init(
       type: DataTypes.INTEGER, 
       allowNull: false,
       references: {
-        model: 'news_categories',
+        model: 'categories',
         key: 'id'
       }
     }
@@ -30,7 +30,7 @@ ArticleCategory.init(
   {
     sequelize,
     modelName: "ArticleCategory",
-    tableName: "news_article_categories",
+    tableName: "article_categories",
     timestamps: true,
     underscored: true
   }

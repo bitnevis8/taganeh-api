@@ -619,6 +619,65 @@ class ArticleController extends BaseController {
       return this.response(res, 500, false, "خطا در دریافت مقالات تگ", null, error);
     }
   }
+
+  // ✅ دریافت مقالات بر اساس چندین تگ
+  async getByTags(req, res) {
+    try {
+      const { tagIds, page = 1, limit = 20 } = req.query;
+      if (!tagIds) {
+        return this.response(res, 400, false, "شناسه‌های تگ‌ها الزامی است.");
+      }
+      const tagIdsArray = Array.isArray(tagIds) ? tagIds : tagIds.split(',').map(id => parseInt(id.trim()));
+      if (tagIdsArray.length === 0) {
+        return this.response(res, 400, false, "حداقل یک تگ باید انتخاب شود.");
+      }
+      const offset = (page - 1) * limit;
+
+      const articles = await Article.findAndCountAll({
+        where: { isActive: true },
+        include: [
+          {
+            model: Agency,
+            as: 'agency',
+            attributes: ['id', 'name', 'logo']
+          },
+          {
+            model: Category,
+            as: 'categories',
+            attributes: ['id', 'name', 'slug'],
+            through: { attributes: [] }
+          },
+          {
+            model: Tag,
+            as: 'tags',
+            attributes: ['id', 'name'],
+            where: { id: { [Op.in]: tagIdsArray } },
+            through: { attributes: [] }
+          }
+        ],
+        order: [['publishedAt', 'DESC']],
+        limit: parseInt(limit),
+        offset: offset,
+        distinct: true
+      });
+
+      const totalPages = Math.ceil(articles.count / limit);
+
+      return this.response(res, 200, true, "مقالات بر اساس تگ‌ها دریافت شد.", {
+        articles: articles.rows,
+        pagination: {
+          currentPage: parseInt(page),
+          totalPages,
+          totalItems: articles.count,
+          itemsPerPage: parseInt(limit)
+        },
+        selectedTags: tagIdsArray
+      });
+    } catch (error) {
+      console.error("❌ Error in getByTags:", error);
+      return this.response(res, 500, false, "خطا در دریافت مقالات بر اساس تگ‌ها", null, error);
+    }
+  }
 }
 
 module.exports = new ArticleController(); 

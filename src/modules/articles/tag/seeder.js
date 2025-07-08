@@ -1,5 +1,4 @@
 const Tag = require("./model");
-const TagFamily = require("../tagFamily/model");
 const seederData = require("./seederData.json");
 
 const seedTags = async () => {
@@ -13,19 +12,7 @@ const seedTags = async () => {
         });
 
         if (!existingTag) {
-          // اگر tagFamilyId ارائه شده، پیدا کردن خانواده تگ بر اساس نام
-          let tagFamilyId = null;
-          if (data.tagFamilyId) {
-            const tagFamilies = await TagFamily.findAll({ where: { isActive: true } });
-            if (data.tagFamilyId <= tagFamilies.length) {
-              tagFamilyId = tagFamilies[data.tagFamilyId - 1].id;
-            }
-          }
-
-          await Tag.create({
-            ...data,
-            tagFamilyId: tagFamilyId
-          });
+          await Tag.create(data);
           console.log(`✅ Tag created: ${data.name}`);
         } else {
           console.log(`⚠️ Tag already exists: ${data.name}`);

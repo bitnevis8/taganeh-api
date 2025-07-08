@@ -17,6 +17,58 @@ function deduplicateTags(tags) {
   return [...new Set(tags)];
 }
 
+// تابع بهبود یافته برای استخراج تگ‌ها
+function extractTags($$) {
+  let tags = [];
+  
+  // روش 1: از meta keywords
+  let metaKeywords = $$('meta[name="keywords"]').attr('content') || $$('meta[property="article:tag"]').attr('content');
+  if (metaKeywords) {
+    tags = metaKeywords.split(',').map(t => t.trim()).filter(Boolean);
+  }
+  
+  // روش 2: از meta article:tag (اگر روش 1 خالی بود)
+  if (tags.length === 0) {
+    const articleTags = $$('meta[property="article:tag"]').map((i, el) => $$(el).attr('content')).get();
+    tags = articleTags.filter(Boolean);
+  }
+  
+  // روش 3: از عناصر HTML با کلاس‌های مختلف
+  if (tags.length === 0) {
+    // جستجو در عناصر مختلف که ممکن است تگ باشند
+    const possibleTagSelectors = [
+      '.tags a',
+      '.tag a', 
+      '.keywords a',
+      '.article-tags a',
+      '.article-tag a',
+      '.news-tags a',
+      '.news-tag a',
+      'a[rel="tag"]',
+      '.tag-cloud a'
+    ];
+    
+    for (const selector of possibleTagSelectors) {
+      $$(selector).each((i, el) => {
+        const tag = $$(el).text().trim();
+        if (tag && tag.length > 1 && tag.length < 50) {
+          tags.push(tag);
+        }
+      });
+      if (tags.length > 0) break;
+    }
+  }
+  
+  // پاکسازی تگ‌ها
+  tags = tags
+    .map(tag => tag.trim())
+    .filter(tag => tag.length > 1 && tag.length < 50) // حذف تگ‌های خیلی کوتاه یا خیلی بلند
+    .filter(tag => !/^[0-9\s\-_]+$/.test(tag)) // حذف تگ‌هایی که فقط عدد یا کاراکترهای خاص هستند
+    .filter(tag => !['خبر', 'اخبار', 'مقاله', 'مطلب', 'نوشته'].includes(tag.toLowerCase())); // حذف کلمات عمومی
+  
+  return tags;
+}
+
 async function getCategoryBySlug(slug) {
   const category = await Category.findOne({ where: { slug } });
   if (!category) throw new Error(`دسته با slug ${slug} یافت نشد.`);
@@ -56,11 +108,7 @@ class EttelaatScraper {
     // عکس شاخص
     const image = $$('meta[property="og:image"]').attr('content') || $$('img').first().attr('src');
     // تگ‌ها (در صورت وجود)
-    let tags = [];
-    let metaKeywords = $$('meta[name="keywords"]').attr('content') || $$('meta[property="article:tag"]').attr('content');
-    if (metaKeywords) {
-      tags = metaKeywords.split(',').map(t => t.trim()).filter(Boolean);
-    }
+    const tags = extractTags($$);
     // تاریخ انتشار (در صورت وجود)
     let publishedAt = $$('meta[property="article:published_time"]').attr('content');
     let publishedAtJalali = null, publishedAtRelative = null;
@@ -388,11 +436,7 @@ class EttelaatScraper {
     // عکس شاخص
     const image = $$('meta[property="og:image"]').attr('content') || $$('img').first().attr('src');
     // تگ‌ها (در صورت وجود)
-    let tags = [];
-    let metaKeywords = $$('meta[name="keywords"]').attr('content') || $$('meta[property="article:tag"]').attr('content');
-    if (metaKeywords) {
-      tags = metaKeywords.split(',').map(t => t.trim()).filter(Boolean);
-    }
+    const tags = extractTags($$);
     // تاریخ انتشار (در صورت وجود)
     let publishedAt = $$('meta[property="article:published_time"]').attr('content');
     let publishedAtJalali = null, publishedAtRelative = null;

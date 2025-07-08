@@ -1,6 +1,7 @@
 const BaseController = require("../../../core/baseController");
 const Tag = require("./model");
-const TagFamily = require("../tagFamily/model");
+const Class = require("../class/model");
+const ClassTag = require("../classTag/model");
 const Joi = require("joi");
 const { Op } = require("sequelize");
 
@@ -29,11 +30,6 @@ class TagController extends BaseController {
 
       const tags = await Tag.findAll({
         where: whereClause,
-        include: [{
-          model: TagFamily,
-          as: 'tagFamily',
-          attributes: ['id', 'name']
-        }],
         order: order.length > 0 ? order : [['createdAt', 'DESC']]
       });
 
@@ -54,13 +50,7 @@ class TagController extends BaseController {
   // ✅ دریافت یک تگ بر اساس ID
   async getOne(req, res) {
     try {
-      const tag = await Tag.findByPk(req.params.id, {
-        include: [{
-          model: TagFamily,
-          as: 'tagFamily',
-          attributes: ['id', 'name']
-        }]
-      });
+      const tag = await Tag.findByPk(req.params.id);
       
       if (!tag) {
         return this.response(res, 404, false, "تگ یافت نشد.");
@@ -69,6 +59,64 @@ class TagController extends BaseController {
       return this.response(res, 200, true, "تگ دریافت شد.", tag);
     } catch (error) {
       console.error("❌ Error in getOne:", error);
+      return this.response(res, 500, false, "خطا در دریافت داده", null, error);
+    }
+  }
+
+  // ✅ دریافت یک تگ بر اساس نام
+  async getByName(req, res) {
+    try {
+      const { name } = req.params;
+      
+      if (!name) {
+        return this.response(res, 400, false, "نام تگ الزامی است.");
+      }
+
+      // Decode the name parameter to handle spaces and special characters
+      const decodedName = decodeURIComponent(name);
+      console.log('=== DEBUG getByName ===');
+      console.log('Original name param:', name);
+      console.log('Decoded name:', decodedName);
+      console.log('Request URL:', req.url);
+      console.log('Request params:', req.params);
+
+      // First, let's see all tags in the database
+      const allTags = await Tag.findAll({
+        where: { isActive: true }
+      });
+      
+      console.log('All tags in database:');
+      allTags.forEach(tag => {
+        console.log(`- ID: ${tag.id}, Name: "${tag.name}", isActive: ${tag.isActive}`);
+      });
+
+      const tag = await Tag.findOne({
+        where: { 
+          name: decodedName,
+          isActive: true 
+        }
+      });
+      
+      if (!tag) {
+        console.log('Tag not found for exact name:', decodedName);
+        // Try case-insensitive search as fallback
+        const foundTag = allTags.find(t => 
+          t.name.toLowerCase() === decodedName.toLowerCase()
+        );
+        
+        if (foundTag) {
+          console.log('Found tag with case-insensitive search:', foundTag.name);
+          return this.response(res, 200, true, "تگ دریافت شد.", foundTag);
+        }
+        
+        console.log('No tag found even with case-insensitive search');
+        return this.response(res, 404, false, "تگ یافت نشد.");
+      }
+
+      console.log('Found tag:', tag.name);
+      return this.response(res, 200, true, "تگ دریافت شد.", tag);
+    } catch (error) {
+      console.error("❌ Error in getByName:", error);
       return this.response(res, 500, false, "خطا در دریافت داده", null, error);
     }
   }
@@ -102,10 +150,10 @@ class TagController extends BaseController {
 
       // اگر tagFamilyId ارائه شده، چک کردن وجود خانواده تگ
       if (value.tagFamilyId) {
-        const tagFamily = await TagFamily.findByPk(value.tagFamilyId);
-        if (!tagFamily) {
-          return this.response(res, 400, false, "خانواده تگ یافت نشد.");
-        }
+        // const tagFamily = await TagFamily.findByPk(value.tagFamilyId); // Removed TagFamily check
+        // if (!tagFamily) {
+        //   return this.response(res, 400, false, "خانواده تگ یافت نشد.");
+        // }
       }
 
       // ایجاد تگ جدید
@@ -117,13 +165,7 @@ class TagController extends BaseController {
       });
 
       // دریافت تگ با اطلاعات خانواده
-      const createdTag = await Tag.findByPk(newTag.id, {
-        include: [{
-          model: TagFamily,
-          as: 'tagFamily',
-          attributes: ['id', 'name']
-        }]
-      });
+      const createdTag = await Tag.findByPk(newTag.id);
 
       return this.response(res, 201, true, "تگ جدید ایجاد شد.", createdTag);
     } catch (error) {
@@ -169,10 +211,10 @@ class TagController extends BaseController {
 
       // اگر tagFamilyId ارائه شده، چک کردن وجود خانواده تگ
       if (value.tagFamilyId) {
-        const tagFamily = await TagFamily.findByPk(value.tagFamilyId);
-        if (!tagFamily) {
-          return this.response(res, 400, false, "خانواده تگ یافت نشد.");
-        }
+        // const tagFamily = await TagFamily.findByPk(value.tagFamilyId); // Removed TagFamily check
+        // if (!tagFamily) {
+        //   return this.response(res, 400, false, "خانواده تگ یافت نشد.");
+        // }
       }
 
       // بروزرسانی تگ
@@ -184,13 +226,7 @@ class TagController extends BaseController {
       });
 
       // دریافت تگ بروزرسانی شده با اطلاعات خانواده
-      const updatedTag = await Tag.findByPk(req.params.id, {
-        include: [{
-          model: TagFamily,
-          as: 'tagFamily',
-          attributes: ['id', 'name']
-        }]
-      });
+      const updatedTag = await Tag.findByPk(req.params.id);
 
       return this.response(res, 200, true, "تگ بروزرسانی شد.", updatedTag);
     } catch (error) {
@@ -245,11 +281,6 @@ class TagController extends BaseController {
 
       const tags = await Tag.findAll({
         where: whereClause,
-        include: [{
-          model: TagFamily,
-          as: 'tagFamily',
-          attributes: ['id', 'name']
-        }],
         order: [['createdAt', 'DESC']]
       });
 
@@ -270,11 +301,6 @@ class TagController extends BaseController {
           tagFamilyId: familyId,
           isActive: true 
         },
-        include: [{
-          model: TagFamily,
-          as: 'tagFamily',
-          attributes: ['id', 'name']
-        }],
         order: [['name', 'ASC']]
       });
 
@@ -282,6 +308,199 @@ class TagController extends BaseController {
     } catch (error) {
       console.error("❌ Error in getByFamily:", error);
       return this.response(res, 500, false, "خطا در دریافت تگ‌های خانواده", null, error);
+    }
+  }
+
+  // ✅ دریافت تگ‌ها بر اساس کلاس‌هایشان
+  async getByClasses(req, res) {
+    try {
+      // دریافت تمام کلاس‌ها با تگ‌های مربوطه
+      const classes = await Class.findAll({
+        include: [{
+          model: Tag,
+          as: 'tags',
+          through: { attributes: [] }, // Exclude junction table attributes
+          where: { isActive: true },
+          required: false // LEFT JOIN
+        }],
+        order: [
+          ['name', 'ASC'],
+          [{ model: Tag, as: 'tags' }, 'name', 'ASC']
+        ]
+      });
+
+      console.log('Classes found:', classes.length);
+      classes.forEach(classItem => {
+        console.log(`Class: ${classItem.name}, Tags: ${classItem.tags?.length || 0}`);
+      });
+
+      // گروه‌بندی تگ‌ها بر اساس کلاس‌ها
+      const groupedTags = classes.map(classItem => ({
+        classId: classItem.id,
+        className: classItem.name,
+        classSlug: classItem.slug,
+        classDescription: classItem.description,
+        parentSlug: classItem.parentSlug,
+        tags: classItem.tags || []
+      })).filter(classItem => classItem.tags.length > 0); // فقط کلاس‌هایی که تگ دارند
+
+      console.log('Grouped tags:', groupedTags.length, 'classes with tags');
+
+      return this.response(res, 200, true, "تگ‌ها بر اساس کلاس‌ها دریافت شد.", groupedTags);
+    } catch (error) {
+      console.error("❌ Error in getByClasses:", error);
+      return this.response(res, 500, false, "خطا در دریافت داده", null, error);
+    }
+  }
+
+  // ✅ تست دیتابیس
+  async testDatabase(req, res) {
+    try {
+      const Article = require('../article/model');
+      const ArticleTag = require('../articleTag/model');
+      
+      // شمارش کل مقالات
+      const totalArticles = await Article.count();
+      const activeArticles = await Article.count({ where: { isActive: true } });
+      
+      // شمارش کل تگ‌ها
+      const totalTags = await Tag.count();
+      const activeTags = await Tag.count({ where: { isActive: true } });
+      
+      // شمارش کل ارتباطات
+      const totalArticleTags = await ArticleTag.count();
+      
+      // چند نمونه مقاله با تگ‌هایشان
+      const sampleArticles = await Article.findAll({
+        include: [{
+          model: Tag,
+          as: 'tags',
+          through: { attributes: [] }
+        }],
+        limit: 5
+      });
+      
+      // چند نمونه تگ با مقالاتشان
+      const sampleTags = await Tag.findAll({
+        include: [{
+          model: Article,
+          as: 'articles',
+          through: { attributes: [] }
+        }],
+        limit: 5
+      });
+
+      // تست شمارش مستقیم برای چند تگ
+      const testTagCounts = await Promise.all(
+        sampleTags.map(async (tag) => {
+          const directCount = await ArticleTag.count({
+            where: { tagId: tag.id }
+          });
+          return {
+            id: tag.id,
+            name: tag.name,
+            associationCount: tag.articles?.length || 0,
+            directCount
+          };
+        })
+      );
+
+      return this.response(res, 200, true, "اطلاعات دیتابیس", {
+        articles: {
+          total: totalArticles,
+          active: activeArticles,
+          sample: sampleArticles.map(a => ({
+            id: a.id,
+            title: a.title,
+            tagCount: a.tags?.length || 0
+          }))
+        },
+        tags: {
+          total: totalTags,
+          active: activeTags,
+          sample: sampleTags.map(t => ({
+            id: t.id,
+            name: t.name,
+            articleCount: t.articles?.length || 0
+          }))
+        },
+        relationships: {
+          totalArticleTags
+        },
+        testCounts: testTagCounts
+      });
+    } catch (error) {
+      console.error("❌ Error in testDatabase:", error);
+      return this.response(res, 500, false, "خطا در تست دیتابیس", null, error);
+    }
+  }
+
+  // ✅ دریافت همه تگ‌ها با شمارش مقالات
+  async getAllWithArticleCount(req, res) {
+    try {
+      const { sortBy = 'name', sortOrder = 'ASC' } = req.query;
+      
+      // دریافت همه تگ‌ها
+      const tags = await Tag.findAll({
+        where: { isActive: true },
+        order: [[sortBy, sortOrder.toUpperCase()]]
+      });
+
+      console.log(`Found ${tags.length} tags`);
+
+      // شمارش مقالات برای هر تگ
+      const ArticleTag = require('../articleTag/model');
+      const Article = require('../article/model');
+      
+      const tagsWithCount = await Promise.all(
+        tags.map(async (tag) => {
+          try {
+            // شمارش مستقیم از جدول junction
+            const articleCount = await ArticleTag.count({
+              where: { tagId: tag.id }
+            });
+
+            console.log(`Tag "${tag.name}": Article count = ${articleCount}`);
+
+            return {
+              ...tag.toJSON(),
+              articleCount
+            };
+          } catch (error) {
+            console.error(`Error counting articles for tag ${tag.name}:`, error);
+            return {
+              ...tag.toJSON(),
+              articleCount: 0
+            };
+          }
+        })
+      );
+
+      // محاسبه آمار کلی
+      const totalTags = tagsWithCount.length;
+      const totalArticles = tagsWithCount.reduce((sum, tag) => sum + tag.articleCount, 0);
+      const averageArticlesPerTag = totalTags > 0 ? Math.round(totalArticles / totalTags) : 0;
+      
+      // شمارش تگ‌های طبقه‌بندی شده
+      const ClassTag = require('../classTag/model');
+      const classifiedTags = await ClassTag.count({
+        distinct: true,
+        col: 'tagId'
+      });
+
+      return this.response(res, 200, true, "همه تگ‌ها با شمارش مقالات دریافت شد.", {
+        tags: tagsWithCount,
+        stats: {
+          totalTags,
+          totalArticles,
+          averageArticlesPerTag,
+          classifiedTags,
+          unclassifiedTags: totalTags - classifiedTags
+        }
+      });
+    } catch (error) {
+      console.error("❌ Error in getAllWithArticleCount:", error);
+      return this.response(res, 500, false, "خطا در دریافت داده", null, error);
     }
   }
 }

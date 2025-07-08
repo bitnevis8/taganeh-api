@@ -6,8 +6,9 @@ const seedUsers = require("../../../modules/user/user/seeder");
 const seedUserRoles = require("../../../modules/user/userRole/seeder");
 
 // Import article module seeders
-const seedTagFamilies = require("../../../modules/articles/tagFamily/seeder");
 const seedTags = require("../../../modules/articles/tag/seeder");
+const seedClasses = require("../../../modules/articles/class/seeder");
+const seedClassTags = require("../../../modules/articles/classTag/seeder");
 const seedCategories = require("../../../modules/articles/category/seeder");
 const seedAgencies = require("../../../modules/articles/agency/seeder");
 const seedArticles = require("../../../modules/articles/article/seeder");
@@ -37,7 +38,7 @@ async function runSeeders() {
     await runSeederGroup(userSeeders, "User Data");
 
     // Run article module seeders
-    await runSeederGroup([seedTagFamilies, seedTags, seedCategories, seedAgencies, seedArticles], "Article Data");
+    await runSeederGroup([seedTags, seedClasses, seedClassTags, seedCategories, seedAgencies, seedArticles], "Article Data");
 
     console.log("\n✅ All database seeding completed successfully!");
   } catch (error) {

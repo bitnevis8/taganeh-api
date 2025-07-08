@@ -1,0 +1,404 @@
+[
+  {
+    "name": "اشخاص",
+    "slug": "person",
+    "description": "افراد و شخصیت‌های مختلف",
+    "parentSlug": null
+  },
+  {
+    "name": "اشخاص سیاسی",
+    "slug": "political-person",
+    "description": "رؤسا، وزرا، دیپلمات‌ها",
+    "parentSlug": "person"
+  },
+  {
+    "name": "هنرمندان",
+    "slug": "artist",
+    "description": "بازیگران، کارگردان‌ها، مجسمه‌سازان",
+    "parentSlug": "person"
+  },
+  {
+    "name": "خوانندگان و موسیقی‌دانان",
+    "slug": "musician",
+    "description": "رپرها، نوازنده‌ها، خواننده‌ها",
+    "parentSlug": "person"
+  },
+  {
+    "name": "ورزشکاران",
+    "slug": "athlete",
+    "description": "فوتبالیست‌ها، کشتی‌گیران، شناگران",
+    "parentSlug": "person"
+  },
+  {
+    "name": "دانشمندان و مخترعان",
+    "slug": "scientist",
+    "description": "چهره‌های علمی، اساتید دانشگاه",
+    "parentSlug": "person"
+  },
+  {
+    "name": "روحانیون و شخصیت‌های مذهبی",
+    "slug": "religious-figure",
+    "description": "علما، رهبران مذهبی",
+    "parentSlug": "person"
+  },
+  {
+    "name": "فعالان اجتماعی و مدنی",
+    "slug": "social-activist",
+    "description": "کنشگران، خبرنگاران، نویسندگان",
+    "parentSlug": "person"
+  },
+  {
+    "name": "کارآفرینان و مدیران",
+    "slug": "entrepreneur",
+    "description": "بنیان‌گذاران شرکت‌ها، مدیران برجسته",
+    "parentSlug": "person"
+  },
+  {
+    "name": "اماکن و جغرافیا",
+    "slug": "place",
+    "description": "مکان‌ها و موقعیت‌های جغرافیایی",
+    "parentSlug": null
+  },
+  {
+    "name": "کشورها",
+    "slug": "country",
+    "description": "ایران، فرانسه، آمریکا",
+    "parentSlug": "place"
+  },
+  {
+    "name": "شهرها",
+    "slug": "city",
+    "description": "تهران، مشهد، پاریس",
+    "parentSlug": "place"
+  },
+  {
+    "name": "محله‌ها / مناطق محلی",
+    "slug": "neighborhood",
+    "description": "ونک، نارمک، منهتن",
+    "parentSlug": "place"
+  },
+  {
+    "name": "اماکن تاریخی",
+    "slug": "historical-site",
+    "description": "تخت جمشید، دیوار چین",
+    "parentSlug": "place"
+  },
+  {
+    "name": "اماکن مذهبی",
+    "slug": "religious-site",
+    "description": "مسجدالحرام، کلیسای نوتردام",
+    "parentSlug": "place"
+  },
+  {
+    "name": "اماکن ورزشی",
+    "slug": "sports-venue",
+    "description": "ورزشگاه آزادی، المپیک پاریس",
+    "parentSlug": "place"
+  },
+  {
+    "name": "اماکن طبیعی",
+    "slug": "natural-site",
+    "description": "جنگل آمازون، کوه دماوند",
+    "parentSlug": "place"
+  },
+  {
+    "name": "سازمان‌ها و نهادها",
+    "slug": "organization",
+    "description": "نهادها و سازمان‌های مختلف",
+    "parentSlug": null
+  },
+  {
+    "name": "نهادهای دولتی",
+    "slug": "government-institution",
+    "description": "وزارت خارجه، مجلس",
+    "parentSlug": "organization"
+  },
+  {
+    "name": "احزاب سیاسی",
+    "slug": "political-party",
+    "description": "اصولگرایان، حزب کارگر",
+    "parentSlug": "organization"
+  },
+  {
+    "name": "شرکت‌ها و برندها",
+    "slug": "company-brand",
+    "description": "اپل، سامسونگ، علی‌بابا",
+    "parentSlug": "organization"
+  },
+  {
+    "name": "باشگاه‌های ورزشی",
+    "slug": "sports-club",
+    "description": "پرسپولیس، بارسلونا",
+    "parentSlug": "organization"
+  },
+  {
+    "name": "مؤسسات فرهنگی / هنری",
+    "slug": "cultural-institution",
+    "description": "خانه سینما، سازمان جشنواره فیلم",
+    "parentSlug": "organization"
+  },
+  {
+    "name": "سازمان‌های بین‌المللی",
+    "slug": "international-organization",
+    "description": "سازمان ملل، ناتو",
+    "parentSlug": "organization"
+  },
+  {
+    "name": "رویدادها",
+    "slug": "event",
+    "description": "رویدادها و اتفاق‌های مختلف",
+    "parentSlug": null
+  },
+  {
+    "name": "رویدادهای ورزشی",
+    "slug": "sports-event",
+    "description": "جام جهانی، المپیک",
+    "parentSlug": "event"
+  },
+  {
+    "name": "رویدادهای سیاسی",
+    "slug": "political-event",
+    "description": "انتخابات، کودتا، نشست",
+    "parentSlug": "event"
+  },
+  {
+    "name": "رویدادهای فرهنگی و هنری",
+    "slug": "cultural-event",
+    "description": "جشنواره فجر، اسکار",
+    "parentSlug": "event"
+  },
+  {
+    "name": "رویدادهای مذهبی",
+    "slug": "religious-event",
+    "description": "اربعین، محرم، عید فطر",
+    "parentSlug": "event"
+  },
+  {
+    "name": "بحران‌ها و فجایع",
+    "slug": "crisis-disaster",
+    "description": "زلزله، جنگ، سقوط هواپیما",
+    "parentSlug": "event"
+  },
+  {
+    "name": "موضوعات و حوزه‌ها",
+    "slug": "topic",
+    "description": "موضوعات و حوزه‌های مختلف",
+    "parentSlug": null
+  },
+  {
+    "name": "سیاست",
+    "slug": "politics",
+    "description": "اخبار دولتی، انتخابات",
+    "parentSlug": "topic"
+  },
+  {
+    "name": "اقتصاد",
+    "slug": "economy",
+    "description": "تورم، بازار، ارز",
+    "parentSlug": "topic"
+  },
+  {
+    "name": "ورزش",
+    "slug": "sports",
+    "description": "لیگ، جام، تیم ملی",
+    "parentSlug": "topic"
+  },
+  {
+    "name": "فرهنگ و هنر",
+    "slug": "culture-art",
+    "description": "ادبیات، سینما، نمایش",
+    "parentSlug": "topic"
+  },
+  {
+    "name": "فناوری و تکنولوژی",
+    "slug": "technology",
+    "description": "هوش مصنوعی، موبایل",
+    "parentSlug": "topic"
+  },
+  {
+    "name": "سلامت",
+    "slug": "health",
+    "description": "پزشکی، واکسن، کرونا",
+    "parentSlug": "topic"
+  },
+  {
+    "name": "آموزش",
+    "slug": "education",
+    "description": "مدارس، کنکور، دانشگاه",
+    "parentSlug": "topic"
+  },
+  {
+    "name": "محیط زیست",
+    "slug": "environment",
+    "description": "آلودگی، گرمایش، منابع طبیعی",
+    "parentSlug": "topic"
+  },
+  {
+    "name": "حقوق بشر و جامعه",
+    "slug": "human-rights-society",
+    "description": "آزادی بیان، عدالت اجتماعی",
+    "parentSlug": "topic"
+  },
+  {
+    "name": "آثار و محصولات",
+    "slug": "work-media",
+    "description": "آثار هنری و محصولات مختلف",
+    "parentSlug": null
+  },
+  {
+    "name": "فیلم و سریال",
+    "slug": "film-series",
+    "description": "سینمای ایران، نتفلیکس",
+    "parentSlug": "work-media"
+  },
+  {
+    "name": "موسیقی",
+    "slug": "music",
+    "description": "آلبوم، تک‌آهنگ، کنسرت",
+    "parentSlug": "work-media"
+  },
+  {
+    "name": "کتاب و ادبیات",
+    "slug": "book-literature",
+    "description": "رمان، مقاله، نویسنده‌ها",
+    "parentSlug": "work-media"
+  },
+  {
+    "name": "بازی و نرم‌افزار",
+    "slug": "game-software",
+    "description": "بازی‌های ویدیویی، اپلیکیشن",
+    "parentSlug": "work-media"
+  },
+  {
+    "name": "اختراعات و پروژه‌ها",
+    "slug": "invention-project",
+    "description": "دستگاه‌ها، کشفیات علمی",
+    "parentSlug": "work-media"
+  },
+  {
+    "name": "زمان یا مناسبت",
+    "slug": "time-occasion",
+    "description": "زمان‌ها و مناسبت‌های مختلف",
+    "parentSlug": null
+  },
+  {
+    "name": "مناسبت‌های مذهبی",
+    "slug": "religious-occasion",
+    "description": "رمضان، محرم، عید قربان",
+    "parentSlug": "time-occasion"
+  },
+  {
+    "name": "مناسبت‌های ملی",
+    "slug": "national-occasion",
+    "description": "نوروز، دهه فجر",
+    "parentSlug": "time-occasion"
+  },
+  {
+    "name": "سال، ماه، روز خاص",
+    "slug": "specific-time",
+    "description": "سال ۱۴۰۳، بهمن‌ماه، روز خبرنگار",
+    "parentSlug": "time-occasion"
+  },
+  {
+    "name": "فصل‌ها",
+    "slug": "season",
+    "description": "زمستان، تابستان",
+    "parentSlug": "time-occasion"
+  },
+  {
+    "name": "مفاهیم و احساسات",
+    "slug": "concept-sentiment",
+    "description": "مفاهیم و احساسات انسانی",
+    "parentSlug": null
+  },
+  {
+    "name": "احساسات انسانی",
+    "slug": "human-emotion",
+    "description": "خشم، شادی، اندوه",
+    "parentSlug": "concept-sentiment"
+  },
+  {
+    "name": "مفاهیم سیاسی/اجتماعی",
+    "slug": "political-social-concept",
+    "description": "آزادی، فساد، برابری",
+    "parentSlug": "concept-sentiment"
+  },
+  {
+    "name": "روندهای خبری",
+    "slug": "news-trend",
+    "description": "ترند، جنجالی، خبر فوری",
+    "parentSlug": "concept-sentiment"
+  },
+  {
+    "name": "تکنولوژی و برندها",
+    "slug": "tech-brand",
+    "description": "تکنولوژی و برندهای دیجیتال",
+    "parentSlug": null
+  },
+  {
+    "name": "برندهای دیجیتال",
+    "slug": "digital-brand",
+    "description": "گوگل، مایکروسافت",
+    "parentSlug": "tech-brand"
+  },
+  {
+    "name": "فناوری‌های نوین",
+    "slug": "new-technology",
+    "description": "بلاکچین، AI، 5G",
+    "parentSlug": "tech-brand"
+  },
+  {
+    "name": "ابزار و گجت‌ها",
+    "slug": "gadget",
+    "description": "موبایل، لپ‌تاپ، چیپست",
+    "parentSlug": "tech-brand"
+  },
+  {
+    "name": "زبان‌ها و اقوام",
+    "slug": "language-ethnicity",
+    "description": "زبان‌ها و اقوام مختلف",
+    "parentSlug": null
+  },
+  {
+    "name": "زبان‌ها",
+    "slug": "language",
+    "description": "فارسی، عربی، انگلیسی",
+    "parentSlug": "language-ethnicity"
+  },
+  {
+    "name": "اقوام و نژادها",
+    "slug": "ethnicity",
+    "description": "فارس، عرب، ترک، کرد",
+    "parentSlug": "language-ethnicity"
+  },
+  {
+    "name": "مذاهب",
+    "slug": "religion",
+    "description": "اسلام، مسیحیت، یهودیت",
+    "parentSlug": "language-ethnicity"
+  },
+  {
+    "name": "رسانه‌ها و منابع خبری",
+    "slug": "media-source",
+    "description": "رسانه‌ها و منابع خبری",
+    "parentSlug": null
+  },
+  {
+    "name": "خبرگزاری‌ها",
+    "slug": "news-agency",
+    "description": "ایرنا، فارس، بی‌بی‌سی",
+    "parentSlug": "media-source"
+  },
+  {
+    "name": "شبکه‌های تلویزیونی",
+    "slug": "tv-network",
+    "description": "صدا و سیما، الجزیره",
+    "parentSlug": "media-source"
+  },
+  {
+    "name": "وب‌سایت‌ها و پلتفرم‌ها",
+    "slug": "website-platform",
+    "description": "یوتیوب، توییتر، تلگرام",
+    "parentSlug": "media-source"
+  }
+] 

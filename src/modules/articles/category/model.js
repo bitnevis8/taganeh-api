@@ -28,7 +28,7 @@ Category.init(
       type: DataTypes.INTEGER, 
       allowNull: true,
       references: {
-        model: 'news_categories',
+        model: 'categories',
         key: 'id'
       },
       comment: 'شناسه دسته‌بندی والد (برای زیردسته‌ها)'
@@ -41,7 +41,7 @@ Category.init(
   {
     sequelize,
     modelName: "Category",
-    tableName: "news_categories",
+    tableName: "categories",
     timestamps: true,
     underscored: true
   }

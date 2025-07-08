@@ -15,23 +15,14 @@ Tag.init(
       allowNull: false, 
       unique: true 
     },
+    slug: {
+      type: DataTypes.STRING(100),
+      allowNull: true,
+      unique: true
+    },
     description: { 
       type: DataTypes.TEXT, 
       allowNull: true 
-    },
-    hasFamily: { 
-      type: DataTypes.BOOLEAN, 
-      defaultValue: false,
-      comment: 'آیا این تگ خانواده دارد یا نه'
-    },
-    tagFamilyId: { 
-      type: DataTypes.INTEGER, 
-      allowNull: true,
-      references: {
-        model: 'news_tag_families',
-        key: 'id'
-      },
-      comment: 'شناسه خانواده تگ (اختیاری)'
     },
     isActive: { 
       type: DataTypes.BOOLEAN, 
@@ -41,7 +32,7 @@ Tag.init(
       type: DataTypes.INTEGER,
       allowNull: true,
       references: {
-        model: 'news_tags',
+        model: 'tags',
         key: 'id'
       },
       comment: 'شناسه والد (اختیاری)'
@@ -50,7 +41,7 @@ Tag.init(
   {
     sequelize,
     modelName: "Tag",
-    tableName: "news_tags",
+    tableName: "tags",
     timestamps: true,
     underscored: true
   }

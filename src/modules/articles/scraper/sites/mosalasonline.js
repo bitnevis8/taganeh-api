@@ -44,9 +44,21 @@ class MosalasOnlineScraper {
     const title = firstLi.find('div.left-service h2.title a').text().trim();
     const summary = firstLi.find('div.left-service p.lead').text().trim();
     // Date
-    const dateStr = firstLi.find('div.left-service .service-date time').first().text().trim();
-    const timeStr = firstLi.find('div.left-service .service-date time').eq(1).text().trim();
-    const { publishedAt, publishedAtJalali, publishedAtRelative } = parseMosalasDate(dateStr, timeStr);
+    const timeElem = firstLi.find('div.left-service .service-date time.news-time').first();
+    let jalaliDateTime = timeElem.text().replace(/\s+/g, ' ').trim(); // e.g. "۱۴۰۴/۰۳/۲۸ ۱۶:۳۱:۰۸"
+    let isoDateTime = timeElem.attr('datetime'); // e.g. "2025-06-18T13:01:08Z"
+    let publishedAt = isoDateTime || new Date().toISOString();
+    let publishedAtJalali = jalaliDateTime || '';
+    let publishedAtRelative = publishedAt ? moment(publishedAt).fromNow() : '';
+    // If isoDateTime is missing, try to parse jalaliDateTime
+    if (!isoDateTime && jalaliDateTime) {
+      const m = moment(toEn(jalaliDateTime), 'jYYYY/jMM/jDD HH:mm:ss');
+      if (m.isValid()) {
+        publishedAt = m.toDate().toISOString();
+        publishedAtJalali = m.format('jYYYY/jMM/jDD HH:mm:ss');
+        publishedAtRelative = m.fromNow();
+      }
+    }
     // Fetch article page for tags
     const { data: articleHtml } = await axios.get(link);
     const $$ = cheerio.load(articleHtml);
@@ -118,9 +130,21 @@ class MosalasOnlineScraper {
     const title = firstLi.find('div.left-service h2.title a').text().trim();
     const summary = firstLi.find('div.left-service p.lead').text().trim();
     // Date
-    const dateStr = firstLi.find('div.left-service .service-date time').first().text().trim();
-    const timeStr = firstLi.find('div.left-service .service-date time').eq(1).text().trim();
-    const { publishedAt, publishedAtJalali, publishedAtRelative } = parseMosalasDate(dateStr, timeStr);
+    const timeElem = firstLi.find('div.left-service .service-date time.news-time').first();
+    let jalaliDateTime = timeElem.text().replace(/\s+/g, ' ').trim(); // e.g. "۱۴۰۴/۰۳/۲۸ ۱۶:۳۱:۰۸"
+    let isoDateTime = timeElem.attr('datetime'); // e.g. "2025-06-18T13:01:08Z"
+    let publishedAt = isoDateTime || new Date().toISOString();
+    let publishedAtJalali = jalaliDateTime || '';
+    let publishedAtRelative = publishedAt ? moment(publishedAt).fromNow() : '';
+    // If isoDateTime is missing, try to parse jalaliDateTime
+    if (!isoDateTime && jalaliDateTime) {
+      const m = moment(toEn(jalaliDateTime), 'jYYYY/jMM/jDD HH:mm:ss');
+      if (m.isValid()) {
+        publishedAt = m.toDate().toISOString();
+        publishedAtJalali = m.format('jYYYY/jMM/jDD HH:mm:ss');
+        publishedAtRelative = m.fromNow();
+      }
+    }
     // Fetch article page for tags
     const { data: articleHtml } = await axios.get(link);
     const $$ = cheerio.load(articleHtml);
@@ -192,9 +216,21 @@ class MosalasOnlineScraper {
     const title = firstLi.find('div.left-service h2.title a').text().trim();
     const summary = firstLi.find('div.left-service p.lead').text().trim();
     // Date
-    const dateStr = firstLi.find('div.left-service .service-date time').first().text().trim();
-    const timeStr = firstLi.find('div.left-service .service-date time').eq(1).text().trim();
-    const { publishedAt, publishedAtJalali, publishedAtRelative } = parseMosalasDate(dateStr, timeStr);
+    const timeElem = firstLi.find('div.left-service .service-date time.news-time').first();
+    let jalaliDateTime = timeElem.text().replace(/\s+/g, ' ').trim(); // e.g. "۱۴۰۴/۰۳/۲۸ ۱۶:۳۱:۰۸"
+    let isoDateTime = timeElem.attr('datetime'); // e.g. "2025-06-18T13:01:08Z"
+    let publishedAt = isoDateTime || new Date().toISOString();
+    let publishedAtJalali = jalaliDateTime || '';
+    let publishedAtRelative = publishedAt ? moment(publishedAt).fromNow() : '';
+    // If isoDateTime is missing, try to parse jalaliDateTime
+    if (!isoDateTime && jalaliDateTime) {
+      const m = moment(toEn(jalaliDateTime), 'jYYYY/jMM/jDD HH:mm:ss');
+      if (m.isValid()) {
+        publishedAt = m.toDate().toISOString();
+        publishedAtJalali = m.format('jYYYY/jMM/jDD HH:mm:ss');
+        publishedAtRelative = m.fromNow();
+      }
+    }
     // Fetch article page for tags
     const { data: articleHtml } = await axios.get(link);
     const $$ = cheerio.load(articleHtml);
@@ -266,9 +302,21 @@ class MosalasOnlineScraper {
     const title = firstLi.find('div.left-service h2.title a').text().trim();
     const summary = firstLi.find('div.left-service p.lead').text().trim();
     // Date
-    const dateStr = firstLi.find('div.left-service .service-date time').first().text().trim();
-    const timeStr = firstLi.find('div.left-service .service-date time').eq(1).text().trim();
-    const { publishedAt, publishedAtJalali, publishedAtRelative } = parseMosalasDate(dateStr, timeStr);
+    const timeElem = firstLi.find('div.left-service .service-date time.news-time').first();
+    let jalaliDateTime = timeElem.text().replace(/\s+/g, ' ').trim(); // e.g. "۱۴۰۴/۰۳/۲۸ ۱۶:۳۱:۰۸"
+    let isoDateTime = timeElem.attr('datetime'); // e.g. "2025-06-18T13:01:08Z"
+    let publishedAt = isoDateTime || new Date().toISOString();
+    let publishedAtJalali = jalaliDateTime || '';
+    let publishedAtRelative = publishedAt ? moment(publishedAt).fromNow() : '';
+    // If isoDateTime is missing, try to parse jalaliDateTime
+    if (!isoDateTime && jalaliDateTime) {
+      const m = moment(toEn(jalaliDateTime), 'jYYYY/jMM/jDD HH:mm:ss');
+      if (m.isValid()) {
+        publishedAt = m.toDate().toISOString();
+        publishedAtJalali = m.format('jYYYY/jMM/jDD HH:mm:ss');
+        publishedAtRelative = m.fromNow();
+      }
+    }
     // Fetch article page for tags
     const { data: articleHtml } = await axios.get(link);
     const $$ = cheerio.load(articleHtml);
@@ -340,9 +388,21 @@ class MosalasOnlineScraper {
     const title = firstLi.find('div.left-service h2.title a').text().trim();
     const summary = firstLi.find('div.left-service p.lead').text().trim();
     // Date
-    const dateStr = firstLi.find('div.left-service .service-date time').first().text().trim();
-    const timeStr = firstLi.find('div.left-service .service-date time').eq(1).text().trim();
-    const { publishedAt, publishedAtJalali, publishedAtRelative } = parseMosalasDate(dateStr, timeStr);
+    const timeElem = firstLi.find('div.left-service .service-date time.news-time').first();
+    let jalaliDateTime = timeElem.text().replace(/\s+/g, ' ').trim(); // e.g. "۱۴۰۴/۰۳/۲۸ ۱۶:۳۱:۰۸"
+    let isoDateTime = timeElem.attr('datetime'); // e.g. "2025-06-18T13:01:08Z"
+    let publishedAt = isoDateTime || new Date().toISOString();
+    let publishedAtJalali = jalaliDateTime || '';
+    let publishedAtRelative = publishedAt ? moment(publishedAt).fromNow() : '';
+    // If isoDateTime is missing, try to parse jalaliDateTime
+    if (!isoDateTime && jalaliDateTime) {
+      const m = moment(toEn(jalaliDateTime), 'jYYYY/jMM/jDD HH:mm:ss');
+      if (m.isValid()) {
+        publishedAt = m.toDate().toISOString();
+        publishedAtJalali = m.format('jYYYY/jMM/jDD HH:mm:ss');
+        publishedAtRelative = m.fromNow();
+      }
+    }
     // Fetch article page for tags
     const { data: articleHtml } = await axios.get(link);
     const $$ = cheerio.load(articleHtml);

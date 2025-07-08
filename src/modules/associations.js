@@ -14,9 +14,9 @@ const Agency = require('./articles/agency/model');
 const Article = require('./articles/article/model');
 const Category = require('./articles/category/model');
 const Tag = require('./articles/tag/model');
-const TagFamily = require('./articles/tagFamily/model');
+const Class = require('./articles/class/model');
+const ClassTag = require('./articles/classTag/model');
 const ArticleCategory = require('./articles/articleCategory/model');
-const ArticleTag = require('./articles/articleTag/model');
 
 // تعریف ارتباطات بین مدل‌ها
 const defineAssociations = () => {
@@ -169,18 +169,18 @@ const defineAssociations = () => {
     });
 
     // ارتباطات مربوط به خانواده تگ و تگ
-    TagFamily.hasMany(Tag, { 
-        foreignKey: 'tagFamilyId', 
-        as: 'tags',
-        onDelete: 'RESTRICT',
-        onUpdate: 'CASCADE'
-    });
-    Tag.belongsTo(TagFamily, { 
-        foreignKey: 'tagFamilyId', 
-        as: 'tagFamily',
-        onDelete: 'RESTRICT',
-        onUpdate: 'CASCADE'
-    });
+    // TagFamily.hasMany(Tag, { 
+    //     foreignKey: 'tagFamilyId', 
+    //     as: 'tags',
+    //     onDelete: 'RESTRICT',
+    //     onUpdate: 'CASCADE'
+    // });
+    // Tag.belongsTo(TagFamily, { 
+    //     foreignKey: 'tagFamilyId', 
+    //     as: 'tagFamily',
+    //     onDelete: 'RESTRICT',
+    //     onUpdate: 'CASCADE'
+    // });
 
     // ارتباطات مربوط به دسته‌بندی سلسله‌مراتبی
     Category.hasMany(Category, { 
@@ -215,6 +215,7 @@ const defineAssociations = () => {
     });
 
     // ارتباطات چند-به-چند مقاله و تگ
+    const ArticleTag = require('./articles/articleTag/model');
     Article.belongsToMany(Tag, { 
         through: ArticleTag, 
         as: 'tags',
@@ -228,6 +229,52 @@ const defineAssociations = () => {
         as: 'articles',
         foreignKey: 'tagId',
         otherKey: 'articleId',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
+    });
+
+    // ارتباطات مربوط به کلاس تگ (سلسله‌مراتبی)
+    Class.hasMany(Class, { 
+        foreignKey: 'parentSlug', 
+        as: 'subClasses',
+        onDelete: 'RESTRICT',
+        onUpdate: 'CASCADE'
+    });
+    Class.belongsTo(Class, { 
+        foreignKey: 'parentSlug', 
+        as: 'parentClass',
+        onDelete: 'RESTRICT',
+        onUpdate: 'CASCADE'
+    });
+
+    // ارتباطات چند-به-چند تگ و کلاس
+    Tag.belongsToMany(Class, { 
+        through: ClassTag, 
+        as: 'classes',
+        foreignKey: 'tagId',
+        otherKey: 'classId',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
+    });
+    Class.belongsToMany(Tag, { 
+        through: ClassTag, 
+        as: 'tags',
+        foreignKey: 'classId',
+        otherKey: 'tagId',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
+    });
+
+    // ارتباطات ArticleTag با Article و Tag
+    ArticleTag.belongsTo(Article, { 
+        foreignKey: 'articleId', 
+        as: 'article',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
+    });
+    ArticleTag.belongsTo(Tag, { 
+        foreignKey: 'tagId', 
+        as: 'tag',
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE'
     });

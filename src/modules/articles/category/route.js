@@ -1,26 +1,15 @@
 const express = require("express");
-const router = express.Router();
 const categoryController = require("./controller");
 
-// دریافت تمام دسته‌بندی‌ها
-router.get("/", categoryController.getAll);
+const router = express.Router();
 
-// دریافت دسته‌بندی‌های اصلی
-router.get("/main", categoryController.getMainCategories);
-
-// جستجو در دسته‌بندی‌ها
-router.get("/search", categoryController.search);
-
-// دریافت یک دسته‌بندی
-router.get("/:id", categoryController.getOne);
-
-// ایجاد دسته‌بندی جدید
-router.post("/", categoryController.create);
-
-// ویرایش دسته‌بندی
-router.put("/:id", categoryController.update);
-
-// حذف دسته‌بندی
-router.delete("/:id", categoryController.delete);
+// روت‌های مربوط به دسته‌بندی‌ها
+router.get("/getAll", categoryController.getAll); // دریافت تمام دسته‌بندی‌ها
+router.get("/getMain", categoryController.getMainCategories); // دریافت دسته‌بندی‌های اصلی
+router.get("/search", categoryController.search); // جستجوی دسته‌بندی‌ها
+router.get("/getOne/:id", categoryController.getOne); // دریافت یک دسته‌بندی بر اساس ID
+router.post("/create", categoryController.create); // ایجاد دسته‌بندی جدید
+router.put("/update/:id", categoryController.update); // ویرایش دسته‌بندی بر اساس ID
+router.delete("/delete/:id", categoryController.delete); // حذف دسته‌بندی بر اساس ID
 
 module.exports = router; 

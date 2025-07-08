@@ -2,25 +2,13 @@ const express = require("express");
 const router = express.Router();
 const agencyController = require("./controller");
 
-// دریافت تمام آژانس‌ها
-router.get("/", agencyController.getAll);
-
-// جستجو در آژانس‌ها
-router.get("/search", agencyController.search);
-
-// تست اتصال به آژانس
-router.post("/test-connection", agencyController.testConnection);
-
-// دریافت یک آژانس
-router.get("/:id", agencyController.getOne);
-
-// ایجاد آژانس جدید
-router.post("/", agencyController.create);
-
-// ویرایش آژانس
-router.put("/:id", agencyController.update);
-
-// حذف آژانس
-router.delete("/:id", agencyController.delete);
+// روت‌های مربوط به آژانس‌ها
+router.get("/getAll", agencyController.getAll); // دریافت تمام آژانس‌ها
+router.get("/search", agencyController.search); // جستجوی آژانس‌ها
+router.post("/testConnection", agencyController.testConnection); // تست اتصال به آژانس
+router.get("/getOne/:id", agencyController.getOne); // دریافت یک آژانس بر اساس ID
+router.post("/create", agencyController.create); // ایجاد آژانس جدید
+router.put("/update/:id", agencyController.update); // ویرایش آژانس بر اساس ID
+router.delete("/delete/:id", agencyController.delete); // حذف آژانس بر اساس ID
 
 module.exports = router; 
