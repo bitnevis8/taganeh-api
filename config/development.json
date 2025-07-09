@@ -8,13 +8,13 @@
     "PORT": "3001"
   },
   "DB": {
-    "NAME": "aryafoulad",
+    "NAME": "taganeh",
     "TYPE": "mysql",
     "HOST": "localhost",
     "USER": "root",
     "PASSWORD": ""
   },
-  "MONGODB_URI": "mongodb://localhost:27017/aryafoulad",
+  "MONGODB_URI": "mongodb://localhost:27017/taganeh",
   "EMAIL": {
     "HOST": "smtp.gmail.com",
     "PORT": 587,

@@ -1,17 +1,17 @@
 {
   "SERVER": {
     "IP": "localhost",
-    "PORT": "3010"
+    "PORT": "3020"
   },
   "FRONTEND": {
-    "HOST": "https://aryafoulad.parandx.com",
-    "PORT": "3011"
+    "HOST": "https://taganeh.ir",
+    "PORT": "3021"
   },
   "DB": {
-    "NAME": "aryafoulad",
+    "NAME": "taganeh",
     "TYPE": "mysql",
     "HOST": "localhost",
-    "USER": "aryafouladroot",
+    "USER": "taganehroot",
     "PASSWORD": "PbYPRucbkgnkc2cGKBe0"
   },
   "MONGODB_URI": "mongodb://pachim:PbYPRucbkgnkc2cGKBe0@127.0.0.1:27017/parandx_news?directConnection=true&serverSelectionTimeoutMS=2000&authSource=admin",
