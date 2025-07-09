@@ -4,7 +4,6 @@ const TasnimScraper = require("./sites/tasnim");
 const EttelaatScraper = require("./sites/ettelaat");
 const ParsNewsScraper = require('./sites/parsnews');
 const FararuScraper = require('./sites/fararu');
-const PQueue = require('p-queue');
 const HamshahriOnlineScraper = require("./sites/hamshahrionline");
 const NamehNewsScraper = require('./sites/namehnews');
 const MashreghNewsScraper = require('./sites/mashreghnews');
@@ -326,6 +325,7 @@ class ScraperController extends BaseController {
 
   // اسکرپ و ذخیره همه سایت‌ها
   async scrapeAndSaveAll(req, res) {
+    const { default: PQueue } = await import('p-queue');
     const queue = new PQueue({ concurrency: 4 });
     try {
       const results = {};
