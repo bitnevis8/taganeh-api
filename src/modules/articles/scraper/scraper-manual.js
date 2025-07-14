@@ -15,7 +15,7 @@ const isProd = SERVER_CONFIG.NODE_ENV === 'production';
 const API_URL = isProd
   ? `https://${SERVER_CONFIG.IP}/articles/scraper/all/save`
   : `http://${SERVER_CONFIG.IP}:${SERVER_CONFIG.PORT}/articles/scraper/all/save`;
-console.log("تتتتتتتتتت"+API_URL);
+
 async function runScraper() {
   try {
     console.log(`🚀 [MANUAL] Scraping and saving all news (manual run) - Environment: ${SERVER_CONFIG.NODE_ENV} - Server: ${SERVER_CONFIG.IP}:${SERVER_CONFIG.PORT}`);
