@@ -1,7 +1,7 @@
 {
   "SERVER": {
     "IP": "api.taganeh.ir",
-    "PORT": "443"
+    "PORT": "3020"
   },
   "FRONTEND": {
     "HOST": "https://taganeh.ir",
