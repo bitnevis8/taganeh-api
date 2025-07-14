@@ -12,7 +12,7 @@ const SERVER_CONFIG = {
 const PROTOCOL = SERVER_CONFIG.NODE_ENV === 'production' ? 'https' : 'http';
 
 const API_URL = `${PROTOCOL}://${SERVER_CONFIG.IP}:${SERVER_CONFIG.PORT}/articles/scraper/all/save`;
-
+console.log(API_URL);
 async function runScraper() {
   try {
     console.log(`🚀 [MANUAL] Scraping and saving all news (manual run) - Environment: ${SERVER_CONFIG.NODE_ENV} - Server: ${SERVER_CONFIG.IP}:${SERVER_CONFIG.PORT}`);
