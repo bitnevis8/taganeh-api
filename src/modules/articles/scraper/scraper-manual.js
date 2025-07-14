@@ -7,7 +7,7 @@ const SERVER_CONFIG = {
   PORT: config.get("SERVER.PORT"),
   NODE_ENV: process.env.NODE_ENV || 'development'
 };
-console.log('NODE_ENV==============:', process.env.NODE_ENV);
+
 // تعیین پروتکل بر اساس محیط
 const PROTOCOL = SERVER_CONFIG.NODE_ENV === 'production' ? 'https' : 'http';
 
