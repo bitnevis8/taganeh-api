@@ -12,7 +12,10 @@ const SERVER_CONFIG = {
 // تعیین پروتکل بر اساس محیط
 const PROTOCOL = SERVER_CONFIG.NODE_ENV === 'production' ? 'https' : 'http';
 
-const API_URL = `${PROTOCOL}://${SERVER_CONFIG.IP}:${SERVER_CONFIG.PORT}/articles/scraper/all/save`;
+const isProd = SERVER_CONFIG.NODE_ENV === 'production';
+const isStandardPort = (SERVER_CONFIG.PORT === '80' && PROTOCOL === 'http') || (SERVER_CONFIG.PORT === '443' && PROTOCOL === 'https');
+const portPart = (isProd && isStandardPort) ? '' : `:${SERVER_CONFIG.PORT}`;
+const API_URL = `${PROTOCOL}://${SERVER_CONFIG.IP}${portPart}/articles/scraper/all/save`;
 console.log(API_URL);
 const job = new CronJob('*/10 * * * *', async () => {
   try {
