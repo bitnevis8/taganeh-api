@@ -117,8 +117,8 @@ const startServer = async () => {
 
     // میدلورهای پردازش داده
     app.use(cookieParser());
-    app.use(bodyParser.json({ limit: '20mb' }));
-    app.use(bodyParser.urlencoded({ extended: true, limit: '20mb' }));
+    app.use(bodyParser.json({ limit: '200mb' }));
+    app.use(bodyParser.urlencoded({ extended: true, limit: '200mb' }));
 
     // مسیرهای API
     app.use("/", baseRouter);
