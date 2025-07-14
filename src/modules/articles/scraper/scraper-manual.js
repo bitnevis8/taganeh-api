@@ -12,9 +12,9 @@ console.log('NODE_ENV==============:', process.env.NODE_ENV);
 const PROTOCOL = SERVER_CONFIG.NODE_ENV === 'production' ? 'https' : 'http';
 
 const isProd = SERVER_CONFIG.NODE_ENV === 'production';
-const isStandardPort = (SERVER_CONFIG.PORT === '80' && PROTOCOL === 'http') || (SERVER_CONFIG.PORT === '443' && PROTOCOL === 'https');
-const portPart = (isProd && isStandardPort) ? '' : `:${SERVER_CONFIG.PORT}`;
-const API_URL = `${PROTOCOL}://${SERVER_CONFIG.IP}${portPart}/articles/scraper/all/save`;
+const API_URL = isProd
+  ? `https://${SERVER_CONFIG.IP}/articles/scraper/all/save`
+  : `http://${SERVER_CONFIG.IP}:${SERVER_CONFIG.PORT}/articles/scraper/all/save`;
 console.log("تتتتتتتتتت"+API_URL);
 async function runScraper() {
   try {
